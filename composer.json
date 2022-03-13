@@ -1,0 +1,18 @@
+{
+    "name": "asp/otus-dz",
+    "authors": [
+        {
+            "name": "asp",
+            "email": "dr.profee@yandex.ru"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "8.5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "OtusDZ\\Src\\": "./src/",
+            "OtusDZ\\Tests\\": "./tests/"
+        }
+    }
+}
