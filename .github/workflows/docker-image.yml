@@ -16,5 +16,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: |
-        docker-compose up
-        docker-compose exec ./vendor/test/phpunit  ./test
+        docker-compose up -d
+        docker ps
+        docker exec otus_dz ./vendor/bin/phpunit .
