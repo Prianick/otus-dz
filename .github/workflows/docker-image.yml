@@ -19,5 +19,6 @@ jobs:
         docker-compose up -d
         docker ps
         docker exec otus_dz ls -l
-        docker exec otus_dz composer install
-        docker exec otus_dz ./vendor/bin/phpunit .
+        docker exec otus_dz
+#        docker exec otus_dz composer install
+#        docker exec otus_dz ./vendor/bin/phpunit .
