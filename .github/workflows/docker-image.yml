@@ -26,4 +26,4 @@ jobs:
         run: docker exec otus_dz composer install
 
       - name: Run tests
-        run: docker exec otus_dz php ./src/index.php
+        run: docker exec otus_dz ./vendor/bin/phpunit ./tests
