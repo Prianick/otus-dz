@@ -13,12 +13,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: |
-        docker-compose up -d
-        docker ps
-        docker exec otus_dz ls -l
-        docker exec otus_dz php ./src/index.php
-#        docker exec otus_dz composer install
-#        docker exec otus_dz ./vendor/bin/phpunit .
+      - name: Build the Docker image
+        run: |
+          docker-compose up -d
+          docker ps
+          docker exec otus_dz ls -l
+      #        docker exec otus_dz composer install
+      #        docker exec otus_dz ./vendor/bin/phpunit .
+
+      - name: Composer install
+        run: docker exec otus_dz composer install
+
+      - name: Run tests
+        run: docker exec otus_dz php ./src/index.php
