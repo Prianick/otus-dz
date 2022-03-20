@@ -1,6 +1,8 @@
 <?php
 
-echo 'started';
+require_once 'bootstrap.php';
+
+echo 'started' . PHP_EOL;
 $isActive = true;
 while ($isActive) {
     $body = 1;
@@ -8,4 +10,4 @@ while ($isActive) {
     $isActive = false;
 }
 
-echo 'finished';
+echo 'finished' . PHP_EOL;;
