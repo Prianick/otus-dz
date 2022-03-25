@@ -12,24 +12,48 @@ class Dz1ModuleTest extends TestCase
     {
         $e = new Equation();
         $roots = $e->solve(1, 0, 1);
-        $this->assertEmpty($roots);
+        $this->assertCount(0, $roots);
     }
 
     public function testNANINF()
     {
         $e = new Equation();
 
-        try {
-            $e->solve(2, INF, 1);
-        } catch (\Exception $ex) {
-            $this->assertEquals($ex->getMessage(), '$a or $b or $c can\'t be NAN or INF');
+        /**
+         * Генерирует набор параметров, включая один неверной
+         *
+         * @param $varPosition - куда вставить неверный параметр
+         * @param $val - значение параметра
+         * @return int[]
+         */
+        $genValues = function ($varPosition, $val): array {
+            $values = [1, 1, 1];
+            $values[$varPosition] = $val;
+
+            return $values;
+        };
+
+        $wrongParamsSet = [INF, NAN];
+
+        $noExceptionWasThrown = false;
+        foreach ($wrongParamsSet as $val) {
+            for ($i = 0; $i < 3; $i++) {
+                try {
+                    call_user_func_array([$e, 'solve'], $genValues($i, $val));
+                    $noExceptionWasThrown = true;
+                    break;
+                } catch (\Exception $ex) {
+                    continue;
+                }
+            }
         }
 
-        try {
-            $e->solve(NAN, 1, 1);
-        } catch (\Exception $ex) {
-            $this->assertEquals($ex->getMessage(), '$a or $b or $c can\'t be NAN or INF');
-        }
+        $paramNames = ['$a', '$b', '$c', ''];
+
+        $this->assertFalse(
+            $noExceptionWasThrown,
+            'Исключение не было выброшено для ' . $paramNames[$i] . ' со значением ' . $val
+        );
     }
 
     public function testHasTwoRoots()

@@ -16,12 +16,12 @@ class Equation
     public function solve(float $a, float $b, float $c): array
     {
         if (
-            $a == INF
-            || $b == INF
-            || $c == INF
-            || $a == NAN
-            || $b == NAN
-            || $c == NAN
+            is_infinite($a)
+            || is_infinite($b)
+            || is_infinite($c)
+            || is_nan($a)
+            || is_nan($b)
+            || is_nan($c)
         ) {
             throw new \Exception('$a or $b or $c can\'t be NAN or INF');
         }
