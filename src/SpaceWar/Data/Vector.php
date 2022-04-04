@@ -18,8 +18,8 @@ class Vector
 
     public function plus(float $velocity, int $direction, int $directionNumber): Vector
     {
-        $this->x = $this->x + $velocity * round(CustomFloat::cos(deg2rad(360 / $directionNumber * $direction)), 7);
-        $this->y = $this->y + $velocity * round(CustomFloat::sin(deg2rad(360 / $directionNumber * $direction)), 7);
+        $this->x = $this->x + $velocity * CustomFloat::cos(deg2rad(360 / $directionNumber * $direction));
+        $this->y = $this->y + $velocity * CustomFloat::sin(deg2rad(360 / $directionNumber * $direction));
 
         return $this;
     }

@@ -5,6 +5,7 @@ namespace OtusDZ\Src\Dz1ModuleTest;
 class CustomFloat
 {
     public const EPS = 0.0000001;
+    public const DEFAULT_PRECISION = 7;
 
     /**
      * Сравнивает два числа с точностью self::EPS.
@@ -39,7 +40,7 @@ class CustomFloat
      */
     public static function cos(float $a): float
     {
-        return self::toZeroIfLessEps(cos($a));
+        return round(self::toZeroIfLessEps(cos($a)), self::DEFAULT_PRECISION);
     }
 
     /**
@@ -48,6 +49,6 @@ class CustomFloat
      */
     public static function sin(float $a): float
     {
-        return self::toZeroIfLessEps(sin($a));
+        return round(self::toZeroIfLessEps(sin($a)), self::DEFAULT_PRECISION);
     }
 }
