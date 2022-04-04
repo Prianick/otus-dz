@@ -17,4 +17,37 @@ class CustomFloat
     {
         return abs($a - $b) < CustomFloat::EPS;
     }
+
+    /**
+     * Приводит число к нулю
+     *
+     * @param float $a
+     * @return float
+     */
+    public static function toZeroIfLessEps(float $a): float
+    {
+        if (abs($a) < CustomFloat::EPS) {
+            return 0.0;
+        }
+
+        return $a;
+    }
+
+    /**
+     * @param float $a - радианы
+     * @return float
+     */
+    public static function cos(float $a): float
+    {
+        return self::toZeroIfLessEps(cos($a));
+    }
+
+    /**
+     * @param float $a - радианы
+     * @return float
+     */
+    public static function sin(float $a): float
+    {
+        return self::toZeroIfLessEps(sin($a));
+    }
 }
