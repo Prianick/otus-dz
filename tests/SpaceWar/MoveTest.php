@@ -44,7 +44,11 @@ class MoveTest extends TestCase
         }
     }
 
-    public function testMove()
+    /**
+     * Тест показывает, что после восьми поворотов на 45 градусов при равномерном движении мы возвращаемся в начальную
+     * точку. Если не поправить ошибку округления конечная точка будет отличаться.
+     */
+    public function testMoveWithRotate()
     {
         $spaceShip = new SpaceShip();
         $spaceShip->setDirection(new Direction(0));
@@ -55,13 +59,13 @@ class MoveTest extends TestCase
         $rotate = new Rotate();
 
         for ($i = 0; $i < 8; $i++) {
-            // Идем в право со скоростью два.
+            // Двигаемся со скоростью два.
             $move->move($spaceShip)->execute();
             // Поворачиваем на 1 значение (45градусов)
             $rotate->rotate($spaceShip)->execute();
         }
 
-        $this->assertEquals((new Vector(0, 0)), $spaceShip->getPosition());
+        $this->assertEquals((new Vector(0.0, 0.0)), $spaceShip->getPosition());
     }
 
     public function testRotate()
