@@ -4,8 +4,8 @@ namespace OtusDZ\Tests\SpaceWar;
 
 use OtusDZ\Src\SimpleSpaceWar\Data\SimpleVector;
 use OtusDZ\Src\SimpleSpaceWar\Errors\Errors;
+use OtusDZ\Src\SimpleSpaceWar\Moves\SimpleMovable;
 use OtusDZ\Src\SimpleSpaceWar\Moves\SimpleMove;
-use OtusDZ\Src\SimpleSpaceWar\Objects\SimpleSpaceShip;
 use OtusDZ\Src\SpaceWar\Moves\Move;
 use OtusDZ\Src\SpaceWar\Data\Direction;
 use OtusDZ\Src\SpaceWar\Moves\Rotate;
@@ -18,27 +18,26 @@ class MoveTest extends TestCase
 {
     public function testSimpleMove()
     {
-        $spaceShip = new SimpleSpaceShip();
-        $spaceShip->velocity = new SimpleVector(-7, 3);
-        $spaceShip->setPosition(new SimpleVector(12, 5));
+        $movableObject = $this->createMock(SimpleMovable::class);
+        $movableObject->method('getPosition')
+            ->willReturn(new SimpleVector(12, 5));
+        $movableObject->method('getVelocity')
+            ->willReturn(new SimpleVector(-7, 3));
+        $movableObject->method('setPosition')
+            ->with($this->equalTo(new SimpleVector(5, 8)));
 
         $move = new SimpleMove();
-        $move->move($spaceShip)->execute();
-        $position = $spaceShip->getPosition();
+        $move->move($movableObject)->execute();
 
-        $this->assertEquals(5, $position->x, 'wrong x');
-        $this->assertEquals(8, $position->y, 'wrong y');
-
-        $spaceShip = new SimpleSpaceShip();
+        $movableObject = $this->createMock(SimpleMovable::class);
         $move = new SimpleMove();
         try {
-            $move->move($spaceShip)->execute();
+            $move->move($movableObject)->execute();
         } catch (Exception $e) {
             $this->assertEquals(Errors::POSITION_UNSET, $e->getCode());
         }
-        $spaceShip->setPosition(new SimpleVector(1, 1));
         try {
-            $move->move($spaceShip)->execute();
+            $move->move($movableObject)->execute();
         } catch (Exception $e) {
             $this->assertEquals(Errors::VELOCITY_UNSET, $e->getCode());
         }

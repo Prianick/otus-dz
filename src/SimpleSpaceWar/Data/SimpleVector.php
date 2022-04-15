@@ -4,9 +4,9 @@ namespace OtusDZ\Src\SimpleSpaceWar\Data;
 
 class SimpleVector
 {
-    public int $x;
+    public int $x = 0;
 
-    public int $y;
+    public int $y = 0;
 
     public function __construct(int $x, int $y)
     {
