@@ -19,8 +19,8 @@ class Rotate
     public function execute(): void
     {
         $direction = $this->r->getDirection();
-        $direction = ($direction + 1) % $this->r->getDirectionsNumber();
         $directionNumber = $this->r->getDirectionsNumber();
+        $direction = ($direction + 1) % $directionNumber;
         $this->r->setDirection($direction);
         $speed = $this->r->getSpeedValue();
 

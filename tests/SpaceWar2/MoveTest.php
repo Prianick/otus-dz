@@ -71,7 +71,7 @@ class MoveTest extends TestCase
         $rotatableObject->method('getSpeedValue')
             ->willReturn(1);
         $rotatableObject->method('setVelocity')
-            ->with($this->equalTo(new Vector(1, 0)));
+            ->with($this->equalTo(new Vector(1.0, 0.0)));
 
         $rotate = new Rotate();
         $rotate->rotate($rotatableObject)->execute();
