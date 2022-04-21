@@ -1,6 +1,6 @@
 <?php
 
-namespace OtusDZ\Src\SpaceWar2\Data;
+namespace OtusDZ\Src\Dz2MoveAndRotate\Data;
 
 class Vector
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace OtusDZ\Src\SpaceWar2\Objects;
+namespace OtusDZ\Src\Dz2MoveAndRotate\Objects;
 
 use OtusDZ\Src\Dz1ModuleTest\CustomFloat;
-use OtusDZ\Src\SpaceWar2\Data\Vector;
-use OtusDZ\Src\SpaceWar2\Moves\Movable;
+use OtusDZ\Src\Dz2MoveAndRotate\Data\Vector;
+use OtusDZ\Src\Dz2MoveAndRotate\Moves\Movable;
 
 class MovableAdapter implements Movable
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace OtusDZ\Src\SpaceWar2\Objects;
+namespace OtusDZ\Src\Dz2MoveAndRotate\Objects;
 
 interface UObject
 {

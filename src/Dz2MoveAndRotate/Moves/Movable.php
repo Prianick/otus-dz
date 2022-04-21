@@ -1,8 +1,8 @@
 <?php
 
-namespace OtusDZ\Src\SpaceWar2\Moves;
+namespace OtusDZ\Src\Dz2MoveAndRotate\Moves;
 
-use OtusDZ\Src\SpaceWar2\Data\Vector;
+use OtusDZ\Src\Dz2MoveAndRotate\Data\Vector;
 
 interface Movable
 {
