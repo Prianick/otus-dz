@@ -36,7 +36,7 @@ class SolidExceptionsTest extends TestCase
         $cmd = $this->createMock(Command::class);
         $e = $this->createMock(Exception::class);
         $this->setFakeQueue(function ($subject) use ($cmd) {
-            return get_class($subject->command) === LogCommand::class;
+            return get_class($subject->command) === get_class($cmd);
         });
         $logHandler = new Log();
         $logHandler->handle($cmd, $e);
@@ -47,8 +47,7 @@ class SolidExceptionsTest extends TestCase
     {
         $cmd = $this->createMock(Command::class);
         $cmd->expects($this->once())->method('execute');
-        $repeatCommand = new RepeatedCommand();
-        $repeatCommand->setArgs([$cmd]);
+        $repeatCommand = new RepeatedCommand($cmd);
         $repeatCommand->execute();
     }
 
@@ -67,8 +66,7 @@ class SolidExceptionsTest extends TestCase
                 return get_class($subject) === LogCommand::class;
             }
         });
-        $repeatedCmd = new RepeatedCommand();
-        $repeatedCmd->setArgs([$cmd]);
+        $repeatedCmd = new RepeatedCommand($cmd);
         $queue = [
             $cmd,
             $repeatedCmd,
@@ -100,8 +98,7 @@ class SolidExceptionsTest extends TestCase
                 return get_class($subject) === LogCommand::class;
             }
         });
-        $repeatedCmd = new RepeatedCommand();
-        $repeatedCmd->setArgs([$cmd]);
+        $repeatedCmd = new RepeatedCommand($cmd);
         $queue = [
             $cmd,
             $repeatedCmd,

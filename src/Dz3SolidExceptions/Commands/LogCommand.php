@@ -11,10 +11,10 @@ class LogCommand implements Command
     public Throwable $throwable;
     public Command $command;
 
-    public function setArgs(array $args)
+    public function __construct(Command $command, Throwable $exception)
     {
-        $this->command = $args[0];
-        $this->throwable = $args[1];
+        $this->command = $command;
+        $this->throwable = $exception;
     }
 
     public function execute()

@@ -13,8 +13,7 @@ class Repeat implements Handler
     public function handle(Command $command, Throwable $throwable)
     {
         $commandQueue = IoC::getInstance()->get(QueueFunction::class);
-        $command = new RepeatedCommand();
-        $command->setArgs([$command, $throwable]);
+        $command = new RepeatedCommand($command);
         $commandQueue->push($command);
     }
 }

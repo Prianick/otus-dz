@@ -14,8 +14,7 @@ class Log implements Handler
     {
         /** @var QueueFunction $commandQueue */
         $commandQueue = IoC::getInstance()->get(QueueFunction::class);
-        $command = new LogCommand();
-        $command->setArgs([$command, $throwable]);
+        $command = new LogCommand($command, $throwable);
         $commandQueue->push($command);
     }
 }

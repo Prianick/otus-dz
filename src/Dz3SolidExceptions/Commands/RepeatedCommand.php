@@ -9,9 +9,9 @@ class RepeatedCommand implements Command
 
     private int $counter = 0;
 
-    public function setArgs(array $args)
+    public function __construct(Command $command)
     {
-        $this->originalCommand = $args[0];
+        $this->originalCommand = $command;
     }
 
     public function execute()
