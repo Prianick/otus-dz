@@ -1,6 +1,6 @@
 <?php
 
-namespace OtusDZ\Src\SpaceWar2\Moves;
+namespace OtusDZ\Src\Dz2MoveAndRotate\Moves;
 
 class Move
 {

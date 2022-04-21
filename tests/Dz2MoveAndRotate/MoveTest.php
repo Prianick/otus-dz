@@ -1,12 +1,12 @@
 <?php
 
-namespace OtusDZ\Tests\SpaceWar2;
+namespace OtusDZ\Tests\Dz2MoveAndRotate;
 
-use OtusDZ\Src\SpaceWar2\Data\Vector;
-use OtusDZ\Src\SpaceWar2\Moves\Movable;
-use OtusDZ\Src\SpaceWar2\Moves\Move;
-use OtusDZ\Src\SpaceWar2\Moves\Rotatable;
-use OtusDZ\Src\SpaceWar2\Moves\Rotate;
+use OtusDZ\Src\Dz2MoveAndRotate\Data\Vector;
+use OtusDZ\Src\Dz2MoveAndRotate\Moves\Movable;
+use OtusDZ\Src\Dz2MoveAndRotate\Moves\Move;
+use OtusDZ\Src\Dz2MoveAndRotate\Moves\Rotatable;
+use OtusDZ\Src\Dz2MoveAndRotate\Moves\Rotate;
 use PHPUnit\Framework\TestCase;
 use Exception;
 
