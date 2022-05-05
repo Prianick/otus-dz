@@ -6,7 +6,7 @@ FROM php:8.0-fpm
 
 #php -m
 
-RUN apt-get update && apt-get install -y git zip unzip wget
+RUN apt-get update && apt-get install -y git zip unzip wget htop nmap
 
 RUN pecl install xdebug \
     && docker-php-ext-enable  xdebug
