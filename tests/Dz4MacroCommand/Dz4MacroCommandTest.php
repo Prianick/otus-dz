@@ -46,6 +46,7 @@ class Dz4MacroCommandTest extends TestCase
     {
         $moveCmd = $this->createMock(Command::class);
         $checkFuelCmd = $this->createMock(Command::class);
+        $this->expectException(CommandException::class);
         $checkFuelCmd->method('execute')
             ->will($this->throwException(new CommandException()));
         $burnFuelCmd = $this->createMock(Command::class);

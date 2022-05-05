@@ -18,12 +18,7 @@ class MacroCommand implements Command
     {
         /** @var Command $command */
         foreach ($this->commands as $command) {
-            try {
-                $command->execute();
-            } catch (CommandException $exception) {
-                // Здесь надо что-то сделать с исключением, но как я понял это выходит за рамки данного задания
-                break;
-            }
+            $command->execute();
         }
     }
 }
