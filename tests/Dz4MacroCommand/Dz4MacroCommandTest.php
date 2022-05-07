@@ -2,6 +2,7 @@
 
 namespace Dz4MacroCommand;
 
+use Exception;
 use OtusDZ\Src\Dz2MoveAndRotate\Data\Vector;
 use OtusDZ\Src\Dz2MoveAndRotate\Moves\Rotatable;
 use OtusDZ\Src\Dz3SolidExceptions\Commands\Command;
@@ -33,11 +34,29 @@ class Dz4MacroCommandTest extends TestCase
         $this->assertEquals(1, 1);
     }
 
-    public function testCheckFuelCommand()
+    public function testCheckFuelCommand0()
     {
         $object = $this->createMock(FuelReducible::class);
+        $this->expectException(Exception::class);
         $object->method('getFuelLevel')->willReturn(0);
-        $this->expectException(CommandException::class);
+        $cmd = new CheckFuelCommand($object);
+        $cmd->execute();
+    }
+
+    public function testCheckFuelCommand1()
+    {
+        $object = $this->createMock(FuelReducible::class);
+        $object->method('getFuelLevel')->willReturn(1);
+        $cmd = new CheckFuelCommand($object);
+        $cmd->execute();
+        $this->assertTrue(true);
+    }
+
+    public function testCheckFuelCommand2()
+    {
+        $this->expectException(Exception::class);
+        $object = $this->createMock(FuelReducible::class);
+        $object->method('getFuelLevel')->willReturn(-1);
         $cmd = new CheckFuelCommand($object);
         $cmd->execute();
     }

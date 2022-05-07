@@ -2,6 +2,7 @@
 
 namespace OtusDZ\Src\Dz4MacroCommand\Commands;
 
+use Exception;
 use OtusDZ\Src\Dz3SolidExceptions\Commands\Command;
 use OtusDZ\Src\Dz4MacroCommand\CommandException;
 use OtusDZ\Src\Dz4MacroCommand\Objects\FuelReducible;
@@ -18,7 +19,7 @@ class CheckFuelCommand implements Command
     public function execute()
     {
         if ($this->o->getFuelLevel() <= 0) {
-            throw new CommandException('Not enough fuel.');
+            throw new Exception('Not enough fuel.');
         }
     }
 }
