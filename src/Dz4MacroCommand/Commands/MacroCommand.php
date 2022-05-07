@@ -20,13 +20,13 @@ class MacroCommand implements Command
      */
     public function execute()
     {
-        try {
-            /** @var Command $command */
-            foreach ($this->commands as $command) {
+        /** @var Command $command */
+        foreach ($this->commands as $command) {
+            try {
                 $command->execute();
+            } catch (Exception $e) {
+                throw new CommandException($e->getMessage());
             }
-        } catch (Exception $e) {
-            throw new CommandException($e->getMessage());
         }
     }
 }
