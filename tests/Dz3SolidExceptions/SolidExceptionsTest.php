@@ -26,7 +26,7 @@ class SolidExceptionsTest extends TestCase
             ->with(
                 $this->callback($checkingFunc)
             );
-        IoC::getInstance()->set(QueueFunction::class, function ($args) use ($queue) {
+        IoC::getInstance()->set(QueueFunction::class, function () use ($queue) {
             return $queue;
         });
     }
