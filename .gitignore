@@ -3,3 +3,5 @@
 .phpunit.result.cache
 notes
 .DS_Store
+
+src/Dz7Thread/var
