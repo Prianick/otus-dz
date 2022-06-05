@@ -20,12 +20,8 @@ class Dz7TreadTest extends TestCase
         parent::setUp();
     }
 
-    /**
-     * Тест работает не стабильно
-     */
-    public function testStarStop()
+    public function testCommand()
     {
-        $this->assertTrue(true);
         // $filePath = $this->commandDirectory . 'start.php';
         // $startCmd = 'nohup php ' . $filePath . ' > /dev/null &';
         // $hardStopCmd = 'nohup php ' . $this->commandDirectory . 'hard_stop.php  > /dev/null &';
@@ -39,7 +35,7 @@ class Dz7TreadTest extends TestCase
         // exec($hardStopCmd, $outPut);
         // sleep(4);
         // $status = ThreadManager::getStatus();
-        // $this->assertTrue(empty($status[1]));
+        $this->assertTrue(empty($status[1]));
     }
 
     public function testSoftStop()
