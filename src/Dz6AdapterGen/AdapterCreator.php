@@ -8,7 +8,12 @@ use ReflectionClass;
 
 class AdapterCreator
 {
-
+    /**
+     * @param string $interface
+     * @param UObject|null $uObject
+     * @throws \ReflectionException
+     * @return mixed
+     */
     public static function create(string $interface, ?UObject $uObject = null)
     {
         $rInterface = new ReflectionClass($interface);
