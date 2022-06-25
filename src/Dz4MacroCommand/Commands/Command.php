@@ -2,7 +2,7 @@
 
 namespace OtusDZ\Src\Dz4MacroCommand\Commands;
 
-interface  Command
+interface Command
 {
     public function execute();
 }

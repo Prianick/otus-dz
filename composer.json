@@ -8,7 +8,7 @@
     ],
     "require": {
         "phpunit/phpunit": "8.5.*",
-        "amphp/socket": "^1.2",
+        "yohang/finite": "*",
         "ext-sockets": "*",
         "ext-pcntl": "*",
         "ext-posix": "*"
