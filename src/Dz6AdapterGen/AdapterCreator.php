@@ -11,6 +11,18 @@ class AdapterCreator
 
     public static function create(string $interface, ?UObject $uObject = null)
     {
+        $standardTypes = [
+            'int',
+            'string',
+            'float',
+            'boolean',
+            'array',
+            'object',
+            'null',
+            'resource',
+            'void',
+        ];
+
         $rInterface = new ReflectionClass($interface);
         $adapterName = $rInterface->getShortName() . 'Adapter';
         if (class_exists($adapterName)) {
@@ -25,25 +37,33 @@ class AdapterCreator
             $paramTypeNameList = [];
             $paramNameList = [];
             foreach ($params as $param) {
-                $paramTypeNameList[] = '\\' . $param->getType() . ' $' . $param->getName();
+                $slash = '';
+                if (!in_array($param->getType(), $standardTypes)) {
+                    $slash = '\\';
+                }
+                $paramTypeNameList[] = $slash . $param->getType() . ' $' . $param->getName();
                 $paramNameList[] = '$' . $param->getName();
             }
             $propertyName = lcfirst(str_replace(['get', 'set'], '', $name));
             $IoCClass = IoC::class;
             if (!str_contains($name, 'get')) {
                 $paramStr = implode(', ', array_merge(["\$this->obj"], $paramNameList));
-                $body = "return \\{$IoCClass}::resolve(\"Tank.Operations.IMovable:{$propertyName}.set\", [{$paramStr}]);";
+                // $body = "return \\{$IoCClass}::resolve(\"Tank.Operations.IMovable:{$propertyName}.set\", [{$paramStr}]);";
 
-                // $body = "return \$this->obj->setProperty('" . $propertyName . "', \$" . $param->getName() . ");";
+                $body = "\$this->obj->setProperty('" . $propertyName . "', \$" . $param->getName() . ");";
             } else {
-                $body = "return \\{$IoCClass}::resolve(\"Tank.Operations.IMovable:{$propertyName}.get\", [\$this->obj]);";
+                // $body = "return \\{$IoCClass}::resolve(\"Tank.Operations.IMovable:{$propertyName}.get\", [\$this->obj]);";
 
-                // $body = "return \$this->obj->getProperty('" . $propertyName . "');";
+                $body = "return \$this->obj->getProperty('" . $propertyName . "');";
             }
 
             $returnTypeStr = '';
             if (!empty($returnType)) {
-                $returnTypeStr = ':\\' . $returnType->getName();
+                $slash = '';
+                if (!in_array($returnType->getName(), $standardTypes)) {
+                    $slash = '\\';
+                }
+                $returnTypeStr = ':' . $slash . $returnType->getName();
             }
 
             $methodsList[] = " public function {$name}(" . implode(', ', $paramTypeNameList) . "){$returnTypeStr}
