@@ -15,7 +15,7 @@ class IoC
     public static array $scopes;
 
     /** @var string */
-    public static string $currentScope = self::DEFAULT_SCOPE;
+    protected static string $currentScope = self::DEFAULT_SCOPE;
 
     /**
      * Метод регистрирует/разрешает зависимости.
@@ -41,5 +41,13 @@ class IoC
         } else {
             return self::$scopes[self::$currentScope]->get($entityName, $args);
         }
+    }
+
+    /**
+     * @return string
+     */
+    public static function getCurrentScope(): string
+    {
+        return self::$currentScope;
     }
 }
