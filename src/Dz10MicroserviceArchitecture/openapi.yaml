@@ -1,0 +1,179 @@
+openapi: 3.0.1
+info:
+  title: AuthRegService
+  description: Сервис используется для авторизации, регистрации и аутентификации
+  termsOfService: https://auth-reg-service.starshipbattles.com/terms/
+  contact:
+    email: apiteam@starshipbattles.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://auth-reg-service.starshipbattles.com/v2
+- url: http://auth-reg-service.starshipbattles.com/v2
+tags:
+- name: user
+  description: Operation about user
+  externalDocs:
+    description: Find out more
+    url: https://auth-reg-service.starshipbattles.com/terms/user
+- name: auth
+  description: Operations about token
+paths:
+  /registr:
+    put:
+      tags:
+      - user
+      summary: Registration
+      description: Registrate new user
+      operationId: registrId
+      requestBody:
+        description: User pass and login must be added to system
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationData'
+        required: true
+      responses:
+        200:
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthInfo'
+        405:
+          description: Invalid input
+          content: {}
+      x-codegen-request-body-name: body
+  /login:
+    post:
+      tags:
+      - user
+      summary: login
+      operationId: loginId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequest'
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuthInfo'
+        400:
+          description: Invalid status value
+          content: {}
+      x-codegen-request-body-name: body
+  /logout:
+    post:
+      tags:
+      - user
+      summary: logout
+      operationId: logoutId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthInfo'
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: boolean
+        400:
+          description: Invalid status value
+          content: {}
+      security:
+      - bearerAuth: []
+      x-codegen-request-body-name: body
+  /check:
+    post:
+      tags:
+      - auth
+      summary: logout
+      operationId: checkId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthCheckRequest'
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuthCheckResult'
+        403:
+          description: No Access
+          content: {}
+      security:
+      - bearerAuth: []
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    RegistrationData:
+      required:
+      - login
+      - name
+      - password
+      type: object
+      properties:
+        login:
+          type: string
+          format: string
+        password:
+          type: string
+          format: string
+        name:
+          type: string
+    AuthInfo:
+      type: object
+      properties:
+        token:
+          type: string
+          format: string
+        userId:
+          type: string
+          format: string
+    AuthRequest:
+      type: object
+      properties:
+        login:
+          type: string
+          format: string
+        password:
+          type: string
+          format: string
+        captcha:
+          type: string
+          format: string
+    AuthCheckRequest:
+      type: object
+      properties:
+        actionId:
+          type: string
+          format: string
+    AuthCheckResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
