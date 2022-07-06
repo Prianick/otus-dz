@@ -26,9 +26,9 @@ class ThreadManager
     public static function savePid()
     {
         $pid = getmypid();
-        echo 'getmypid: ' . $pid . PHP_EOL;
+        // echo 'getmypid: ' . $pid . PHP_EOL;
         $pid = posix_getpid();
-        echo 'posix_getpid: ' . $pid . PHP_EOL;
+        // echo 'posix_getpid: ' . $pid . PHP_EOL;
         file_put_contents(self::getFileName(), $pid);
     }
 
