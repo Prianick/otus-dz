@@ -1,6 +1,6 @@
 <?php
 
-namespace OtusDZ\Src\Dz10State;
+namespace OtusDZ\Src\Dz11State;
 
 use Finite\Loader\ArrayLoader;
 use Finite\StatefulInterface;

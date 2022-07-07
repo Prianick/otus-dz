@@ -1,11 +1,11 @@
 <?php
 
-namespace Dz10State;
+namespace Dz11State;
 
-use OtusDZ\Src\Dz10State\CommandProcessor;
-use OtusDZ\Src\Dz10State\HardStopCommand;
-use OtusDZ\Src\Dz10State\MoveToCommand;
-use OtusDZ\Src\Dz10State\RunCommand;
+use OtusDZ\Src\Dz11State\CommandProcessor;
+use OtusDZ\Src\Dz11State\HardStopCommand;
+use OtusDZ\Src\Dz11State\MoveToCommand;
+use OtusDZ\Src\Dz11State\RunCommand;
 use OtusDZ\Src\Dz5IoC\IoC;
 use OtusDZ\Src\Dz5IoC\IoCRegister;
 use OtusDZ\Src\SomeNotes\Queue\src\QueueManager;
