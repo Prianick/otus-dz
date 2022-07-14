@@ -1,0 +1,184 @@
+swagger: "2.0"
+info:
+  description: "Сервис используется для авторизации, регистрации и аутентификации"
+  version: "1.0.0"
+  title: "AuthRegService"
+  termsOfService: "https://auth-reg-service.starshipbattles.com/terms/"
+  contact:
+    email: "apiteam@starshipbattles.com"
+  license:
+    name: "Apache 2.0"
+    url: "https://www.apache.org/licenses/LICENSE-2.0.html"
+host: "auth-reg-service.starshipbattles.com"
+basePath: "/v2"
+tags:
+- name: "user"
+  description: "Operation about user"
+  externalDocs:
+    description: "Find out more"
+    url: "https://auth-reg-service.starshipbattles.com/terms/user"
+- name: "auth"
+  description: "Operations about token"
+schemes:
+- "https"
+- "http"
+paths:
+  /registr:
+    put:
+      tags:
+      - "user"
+      summary: "Registration"
+      description: "Registrate new user"
+      operationId: "registrId"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User pass and login must be added to system"
+        required: true
+        schema:
+          $ref: "#/definitions/RegistrationData"
+      responses:
+        "405":
+          description: "Invalid input"
+        "200":
+          description: "Invalid input"
+          schema:
+            $ref: "#/definitions/AuthInfo"
+  /login:
+    post:
+      tags:
+      - "user"
+      summary: "login"
+      description: ""
+      operationId: "loginId"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/AuthRequest"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AuthInfo"
+        "400":
+          description: "Invalid status value"
+  /logout:
+    post:
+      tags:
+      - "user"
+      summary: "logout"
+      description: ""
+      operationId: "logoutId"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/AuthInfo"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "boolean"
+        "400":
+          description: "Invalid status value"
+      security:
+        - basicAuth: []
+  /check:
+    post:
+      tags:
+      - "auth"
+      summary: "logout"
+      description: ""
+      operationId: "checkId"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/AuthCheckRequest"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AuthCheckResult"
+        "403":
+          description: "No Access"
+      security:
+        - basicAuth: []
+securityDefinitions:
+  basicAuth:
+    type: basic
+definitions:
+  RegistrationData:
+    type: "object"
+    required:
+    - "login"
+    - "password"
+    - "name"
+    properties:
+      login:
+        type: "string"
+        format: "string"
+      password:
+        type: "string"
+        format: "string"
+      name:
+        type: "string"
+  AuthInfo:
+    type: "object"
+    properties:
+      token:
+        type: "string"
+        format: "string"
+      userId:
+        type: "string"
+        format: "string"
+  AuthRequest:
+    type: "object"
+    properties:
+      login:
+        type: "string"
+        format: "string"
+      password:
+        type: "string"
+        format: "string"
+      captcha:
+        type: "string"
+        format: "string"
+  AuthCheckRequest:
+    type: "object"
+    properties:
+      actionId:
+        type: "string"
+        format: "string"
+  AuthCheckResult:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
